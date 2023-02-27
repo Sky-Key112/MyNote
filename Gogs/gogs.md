@@ -3,7 +3,7 @@
 ## **介绍**
 
 个人搭建git，GitHub gogs项目，最低可以在树莓派上运行，比gitlab需要的配置低。
-
+***
 ## **docker部署**
 
     # Pull image from Docker Hub.
@@ -17,13 +17,12 @@
 
     # Use `docker start` if you have stopped it.
     $ docker start gogs
-
+***
 ## **gogs首次安装**
-
 1. 浏览器输入`localhost:10880`首次进入为配置界面
 2. 需要选择数据库，推荐使用MySQL，方便快捷。
 3. 监听端口写22跟3000
-
+***
 ## ***踩坑***
 
     监听端口使用3000,而不是10880.
