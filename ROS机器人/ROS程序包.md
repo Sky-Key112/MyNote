@@ -1,5 +1,7 @@
 # ROS程序包 
 可选catkin或者roscreate创建
+> 需要提前建立工作空间,[见ROS.md](./ROS.md#创建ros工作空间)
+
 ***
 # **1.创建一个catkin程序包**
     catkin_create_pkg <package_name> [depend1] [depend2] [depend3]
@@ -90,6 +92,8 @@
    ***
 # **2.创建一个rosbuild程序包**
 
+> `最新版ROS 官方教程不推荐使用rosbuild` 仅做记录 防止碰到老版ROS
+>
 在当前目录下创建新包,并指定包依赖.
 
     roscreate-pkg [package_name] [depend1] [depend2] [depend3]
@@ -109,3 +113,40 @@
     Creating package file ~/fuerte_workspace/sandbox/beginner_tutorials/manifest.xml
     Creating package file ~/fuerte_workspace/sandbox/beginner_tutorials/CMakeLists.txt
     Creating package file ~/fuerte_workspace/sandbox/beginner_tutorials/mainpage.dox
+
+***
+# 编译程序包
+
+## catkin编译程序包
+> 如果你还没设置环境的话，记得先soucre一下。在Ubuntu中的操作如下：
+> `source /opt/ros/<distro>/setup.bash`
+
+1. 使用catkin_make
+   catkin_make 是一个命令行工具，它简化了标准catkin工作流程。你可以认为catkin_make是在标准CMake工作流程中依次调用了cmake和make。
+
+        用法:
+        # 在catkin工作空间下
+        $ catkin_make [make_targets] [-DCMAKE_VARIABLES=...]
+
+        例子:
+        cd catkin_ws 
+        catkin_make
+        (默认当前目录的src)
+        catkin_make install
+        (将编译后的软件包打包到当前目录的`install`下)
+
+        自定义目录:
+        catkin_make --source xxx
+        (xxx为当前目录下的自定义目录,会根据自定义目录里的CMake文件编译工具)
+
+2. 目录结构
+   build 目录是构建空间的默认位置，同时cmake和make也是在这里被调用来配置和构建你的软件包。而devel目录是开发空间的默认位置, 在安装软件包之前，这里可以存放可执行文件和库。
+
+        $ ls
+
+        build
+        devel
+        src
+   
+
+
