@@ -32,6 +32,9 @@ roscore是你在运行所有ROS程序前首先要运行的命令。
 
     $ export ROS_HOSTNAME=localhost
     $ export ROS_MASTER_URI=http://localhost:11311
+
+    可以在~/.bashrc 中文末添加这两行,即可每次启动终端自动export
+
 多机运行时,修改 `/etc/hosts` ,参考微雪的[`hosts修改`](https://www.waveshare.net/wiki/JetRacer_ROS_AI_Kit_%E6%95%99%E7%A8%8B%E5%9B%9B%E3%80%81%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%9C%BA%E9%80%9A%E8%AE%AF)
 
 然后会看到如下信息:
