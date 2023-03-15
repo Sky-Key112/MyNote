@@ -40,13 +40,13 @@ docker network 命令表
     Manage networks
 
     Commands:
-    connect     Connect a container to a network
-    create      Create a network
-    disconnect  Disconnect a container from a network
-    inspect     Display detailed information on one or more networks
-    ls          List networks
-    prune       Remove all unused networks
-    rm          Remove one or more networks
+    connect     将容器连接到网络
+    create      创建网络
+    disconnect  断开容器与网络的连接
+    inspect     显示一个或多个网络的详细信息
+    ls          列出网络
+    prune       删除所有未使用的网络
+    rm          删除一个或多个网络
 
 
 
