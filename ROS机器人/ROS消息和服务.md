@@ -61,4 +61,50 @@ msg文件就是简单的文本文件，每行都有一个字段类型和字段�
     其他msg文件
     variable-length array[] 和 fixed-length array[C]
 
-    
+ROS中还有一个特殊的数据类型：`Header`，它含有时间戳和ROS中广泛使用的坐标帧信息。在msg文件的第一行经常可以看到`Header` `header`。
+
+下面是一个使用了Header、字符串原语和其他两个消息的示例： 下面是一个msg文件的样例，它使用了Header，string，和其他另外两个消息的类型：
+
+    Header header
+    string child_frame_id
+    geometry_msgs/PoseWithCovariance pose
+    geometry_msgs/TwistWithCovariance twist
+
+srv文件和msg文件一样，只是它们包含两个部分：请求和响应。这两部分用一条---线隔开。下面是一个srv文件的示例：
+
+    int64 A
+    int64 B
+    ---
+    int64 Sum
+
+    A和B是请求, Sum是响应。
+
+## 使用msg
+
+下面，我们将在之前创建的软件包里定义一个新的消息。
+
+    $ roscd beginner_tutorials
+    $ mkdir msg
+    $ echo "int64 num" > msg/Num.msg
+
+1
+
+    ##在此声明和构建消息、服务或操作
+    ##套餐，按照如下步骤操作：
+    ##*让MSG_DEP_SET为您在中使用的消息类型的包集
+    ##您的消息/服务/动作(如std_msgs、actionlib_msgs等)。
+    ##*在Package.xml文件中：
+    ##*MESSAGE_GENERATION添加Build_Depend标签
+    ##*为MSG_DEP_SET中的每个包添加BUILD_Depend和EXEC_Depend标签
+    ##*如果MSG_DEP_SET不为空，则已拉入以下依赖项
+    ##但仍然可以肯定地声明：
+    ##*为Message_Runtime添加EXEC_Depend标签
+    ##*此文件(CMakeLists.txt)中：
+    ##*将MESSAGE_GENERATION和MSG_DEP_SET中的每个包添加到
+    ##Find_Package(Catkin必需组件...)
+    ##*将Message_Runtime和MSG_DEP_SET中的每个包添加到
+    ##Catkin_Package(Catkin_Depends...)
+    ##*根据需要取消对下面的添加_*_文件部分的注释
+    ##列出每个需要处理的.msg/.srv/.action文件
+    ##*取消注释下面的GENERATE_MESSAGE条目
+    ##*将MSG_DEP_SET中的每个包添加到GENERATE_MESSAGE(依赖...)
