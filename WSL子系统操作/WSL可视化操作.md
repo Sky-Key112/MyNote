@@ -1,7 +1,7 @@
 # WSL GUI应用
 
 >暂时比较常用gedit
->[`微软官网教程`](https://learn.microsoft.com/zh-cn/windows/wsl/tutorials/gui-apps)
+[`微软官网教程`](https://learn.microsoft.com/zh-cn/windows/wsl/tutorials/gui-apps)
 
  1. 安装 Gedit
    Gedit 是 GNOME 桌面环境的默认文本编辑器。
