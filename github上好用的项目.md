@@ -7,7 +7,9 @@
 |多端通用前端框架(vue进阶版)|`quasar`|[quasar](https://github.com/quasarframework/quasar)|更好的开发体验，提供了一套基于 Vue、React、Angular 的前端框架，支持 Vue、React、Angular、Node.js 等多个框架。[入门教程](http://www.quasarchs.com/)|
 |⭐Nginx可视化管理平台。|`nginx-proxy-manager`|[nginx-proxy-manager](https://github.com/nginx-proxy-manager/nginx-proxy-manager)|Nginx可视化管理平台。开箱即用支持 Docker 一键部署，可以让用户通过 Web 界面在线配置、管理 Nginx 服务，支持转发、重定向、SSL 证书、高级配置等功能。|
 |脸书开源的ai分割模型|`segment-anything`|[segment-anything](https://github.com/facebookresearch/segment-anything)|2.4G的模型，Python环境运行，输入选点或者选框返回物体的mask，分割图像的利器。 |
-|C++版的pandas库|`DataFrame`|[DataFrame](https://github.com/hosseinmoein/DataFrame)|
+|~~C++版的pandas库~~|~~`DataFrame`~~|[DataFrame](https://github.com/hosseinmoein/DataFrame)|不行,烂了。C++的问题,强类型必须要求csv读取表头带数据类型。C++可以用QXlsx读xlsx文件,csv直接自己写个类。|
+|类似plot的C#库|`ScottPlot`|[ScottPlot](https://github.com/ScottPlot/ScottPlot)|一个免费、开源的 .NET 绘图库。该项目可以轻松地以交互方式显示大型数据集，只需几行代码即可实现折线图、条形图、饼图、散点图等。|
+
 
 
 

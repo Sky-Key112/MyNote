@@ -1,5 +1,5 @@
 {
-    "commentTranslate.multiLineMerge": false,
+    "commentTranslate.multiLineMerge": true,
     "commentTranslate.source": "Kaiqun.tencent-cloud-translate-tencentCloud",
     "Codegeex.Explanation.LanguagePreference": "zh-CN"
 }
