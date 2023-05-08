@@ -59,5 +59,57 @@ add_executable(sample_exe sample_exe.cpp)
 - `PROJECT_BINARY_DIR` 项目生成的临时二进制目录，用于存放配置/编译中间文件。
 
 #### 2. target
-`target`(目标)在cmake中是一个很重要的概念，应当将它理解为一个object。
-- 
+`target`(目标)在cmake中是一个很重要的概念，应当将它理解为一个object(对象)。
+- Target 是 CMake 中的一个核心概念，它表示一个构建目标，可以是一个可执行文件、一个库文件或者一个自定义的命令。
+- 使用`add_executable()`、`add_library()`、`target_link_libraries()` 命令即刻生成一个target的对象。后续所有操作都是基于对这个对象进行链接、构建。
+- `add_custom_target()`：用于定义一个自定义的 Target，可以执行一些特定的命令。
+- `Target` 之间可以通过 `target_link_libraries()` 命令来指定链接关系，也可以通过 `target_dependencies()` 命令来指定依赖关系。CMake 还提供了许多以 `target_` 开头的命令来设置 Target 的属性，如 `target_sources()`、`target_include_directories()` 等。
+- 常见的target命令:
+  - `target_compile_definitions()`: 用于为目标添加编译时的宏定义，相当于 gcc 的 -D 选项。
+  - `target_compile_features()`: 用于为目标指定所需的编译器特性，如 cxx_std_11 表示需要支持 C++11 标准。
+  - `target_compile_options()`: 用于为目标添加编译选项，如 -Wall -O2 等。
+  - `target_include_directories()`: 用于为目标添加头文件搜索路径，相当于 gcc 的 -I 选项。
+  - `target_link_directories()`: 用于为目标添加库文件搜索路径，相当于 gcc 的 -L 选项。
+  - `target_link_libraries()`: 用于为目标添加链接的库文件，相当于 gcc 的 -l 选项。
+  - `target_link_options()`: 用于为目标添加链接选项，如 -pthread -static 等。
+  - `target_precompile_headers()`: 用于为目标启用预编译头文件，可以提高编译速度。
+  - `target_sources()`: 用于为目标添加源文件，可以在多个地方分别指定源文件。
+  
+  
+
+#### 3. PUBLC PRIVATE INTERFACE
+
+- `PUBLIC` 声明该关键字后续的值在构建该target时使用，并向下游提供。
+- `PRIVATE` 声明该关键字后续的值仅在构建该target时使用，不向下游提供。
+- `INTERFACE` 声明该关键字仅向下游提供，不在构建该target时使用。
+
+### 查找依赖
+
+#### 1. find_package
+`find_package` 命令是用于查找和加载外部依赖包的配置文件的。
+
+它有两种模式：Module 模式和 Config 模式。
+ - Module 模式：在这种模式下，CMake 会搜索一个名为 Find<PackageName>.cmake 的文件，这个文件一般由 CMake 自带或者由用户提供，它负责寻找依赖包的路径、版本、库文件等信息，并设置相应的变量供后续使用。
+ - Config 模式：在这种模式下，CMake 会搜索一个名为 <PackageName>Config.cmake 或者 <lowercasePackageName>-config.cmake 的文件，这个文件一般由依赖包自身提供，它直接包含了依赖包的路径、版本、库文件等信息，并提供一些目标或函数供后续使用。
+
+``` cmake
+find_package(
+<PackageName>    # 是要查找的依赖包的名称，必须指定。
+[version]        # 是要求的依赖包的版本号，可选指定。
+[EXACT]          # 表示要求找到的依赖包版本必须和指定的版本完全一致，否则会报错。
+[QUIET]          # 表示不输出任何信息，只设置变量或目标。
+[MODULE]         # 表示强制使用 Module 模式查找依赖包，即使存在 Config 模式的文件。
+[REQUIRED]       # 表示如果找不到依赖包，则报错并终止构建过程。
+[[COMPONENTS] [components…]]  # 表示指定要查找的依赖包的组件或模块，后面跟随一个或多个组件名称。不同的依赖包可能有不同的组件划分，需要查看相应的文档。
+[OPTIONAL_COMPONENTS components…])  # 表示指定要查找的依赖包的可选组件或模块，后面跟随一个或多个组件名称。如果找不到可选组件，则不会报错，但会设置相应的变量。
+```
+```cmake 
+find_package(<PackageName> [version] [EXACT] [QUIET] [MODULE]
+             [REQUIRED] [[COMPONENTS] [components...]]
+             [OPTIONAL_COMPONENTS components...]
+             [REGISTRY_VIEW  (64|32|64_32|32_64|HOST|TARGET|BOTH)]
+             [GLOBAL]
+             [NO_POLICY_SCOPE]
+             [BYPASS_PROVIDER])
+```
+
