@@ -1,0 +1,87 @@
+<head>
+    <script src="vue.min.js"></script>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <script src="bootstrap.min.js"></script>
+    <title>vue</title>
+</head>
+
+<body>
+    <div id="app" class="container mt-5">
+        <h1>条码检测</h1>
+        <br>
+        <input v-model="sn" @keyup="onKeyup" placeholder="请输入产品sn码" ref="input"  :autofocus="true">
+        <button @click="check" class="btn btn-primary" >检测</button>
+        <button @click="deleteSN" class="btn btn-danger">删除条码</button>
+        <br>
+        <p v-if="seen">{{ sn }}条码结果:{{ result }}</p>
+        <div v-if="loading" class="spinner-border"></div>
+    </div>
+</body>
+
+
+<script>
+    var app = new Vue({
+        el: '#app', 
+        data: {
+            sn: '',
+            result: '', 
+            seen: false,
+            loading: false,
+        },
+
+        methods:{
+            check: function(){
+                if(this.sn.trim()===""){
+                    alert("SN码不能为空");
+                    return;
+                }
+                this.seen = true;
+                this.result = "OK";
+                this.$refs.input.select();
+            },
+
+            deleteSN: function(){
+                if(confirm("是否删除条码:"+this.sn+"?")){
+                    this.seen = true;
+                    this.result = "NG";
+                }
+                else{
+                    this.seen = false;
+
+                }
+                
+            },
+            onKeyup(evt) {
+                if(evt.key === 'Enter') {
+                this.check(); 
+                }
+            },
+        },
+
+        created () {
+            this.$nextTick(() => {
+            this.$refs.input.focus() 
+            })
+        },
+    });
+
+</script>
+
+<style>
+    button{
+        border-radius:25x;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    input {
+        width: 300px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .container{
+        text-align: center;
+
+    }
+</style>
